@@ -1,63 +1,68 @@
 <?php
-require_once "config.php";
+// require_once "config.php";
 
-$name = $price = $weight = $manufacturer = $country = "";
-$name_error = $price_error = $weight_error = $manufacturer_error = $country_error = "";
+// $name = $price = $weight = $manufacturer = $country = "";
+// $name_error = $priceerror = $weight_error = $manufacturer_error = $country_error = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = trim($_POST["name"]);
-    if (empty($firstName)) {
-        $name_error = "Name is required.";
-    } elseif (!filter_var($firstName, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))) {
-        $name_error = "First Name is invalid.";
-    } else {
-        $firstName = $firstName;
-    }
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $name = trim($_POST["name"]);
+//     if (empty($name)) {
+//         $name_error = "Name is required.";
+//     } 
+//     else {
+//         $name = $name;
+//     }
 
-    $lastName = trim($_POST["last_name"]);
+//     $price = trim($_POST["price"]);
 
-    if (empty($lastName)) {
-        $last_name_error = "Last Name is required.";
-    } elseif (!filter_var($firstName, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))) {
-        $last_name_error = "Last Name is invalid.";
-    } else {
-        $lastName = $lastName;
-    }
+//     if (empty($price)) {
+//         $price_error = "Last Name is required.";
+//     } 
+//     else {
+//         $price = $price;
+//     }
 
-    $email = trim($_POST["email"]);
-    if (empty($email)) {
-        $email_error = "Email is required.";
-    } elseif (!filter_var($firstName, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))) {
-        $email_error = "Please enter a valid email.";
-    } else {
-        $email = $email;
-    }
+//     $weight = trim($_POST["weight"]);
+//     if (empty($weight)) {
+//         $weight_error = "weight is required.";
+//     } 
+//     else {
+//         $weight = $weight;
+//     }
 
-    $phoneNumber = trim($_POST["phone_number"]);
-    if(empty($phoneNumber)){
-        $phone_number_error = "Phone Number is required.";
-    } else {
-        $phoneNumber = $phoneNumber;
-    }
+//     $manufacturer = trim($_POST["manufacturer"]);
+//     if(empty($manufacturer)){
+//         $manufacturer_error = "Phone Number is required.";
+//     } else {
+//         $manufacturer = $manufacturer;
+//     }
 
-    $address = trim($_POST["address"]);
-    if(empty($address)){
-        $address_error = "Address is required.";
-    } else {
-        $address = $address;
-    }
+//     $country = trim($_POST["country"]);
+//     if(empty($country)){
+//         $country_error = "country is required.";
+//     } else {
+//         $country = $country;
+//     }
 
-    if (empty($first_name_error_err) && empty($last_name_error) && empty($email_error) && empty($phone_number_error) && empty($address_error) ) {
-          $sql = "INSERT INTO `users` (`first_name`, `last_name`, `email`, `phone_number`, `address`) VALUES ('$firstName', '$lastName', '$email', '$phoneNumber', '$address')";
+//     if (empty($name_error) && empty($price_error) && empty($weight_error) && empty($manufacturer_error) && empty($country_error) ) {
+//           $sql = "INSERT INTO `product` (`name`, `price`, `weight`, `manufacturer`, `country`) VALUES ('$name', '$price', '$weight', '$manufacturer', '$country')";
 
-          if (mysqli_query($conn, $sql)) {
-              header("location: index.php");
-          } else {
-               echo "Something went wrong. Please try again later.";
-          }
-      }
-    mysqli_close($conn);
-}
+//  if (mysqli_query($conn, $sql)) { //this is line 30
+//         echo "New record created successfully";
+//     } else {
+//         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//     }
+
+//           if (mysqli_query($conn, $sql)) {
+//               echo "New record created successfully"; 
+//               header("location: index.php");
+//           } else {
+//                echo "Something went wrong. Please try again later.";
+//                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//           }
+//       }
+//     mysqli_close($conn);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -83,39 +88,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group <?php echo (!empty($first_name_error)) ? 'has-error' : ''; ?>">
-                            <label>First Name</label>
-                            <input type="text" name="first_name" class="form-control" value="">
+                            <label>Наименование товара</label>
+                            <input type="text" name="first_name" class="form-control" value="" placeholder = "Например: футбольный мяч">
                             <span class="help-block"><?php echo $first_name_error;?></span>
                         </div>
 
-                        <div class="form-group <?php echo (!empty($last_name_error)) ? 'has-error' : ''; ?>">
-                            <label>Last Name</label>
-                            <input type="text" name="last_name" class="form-control" value="">
-                            <span class="help-block"><?php echo $last_name_error;?></span>
+                        <div class="form-group <?php echo (!empty($priceerror)) ? 'has-error' : ''; ?>">
+                            <label>Цена товара</label>
+                            <input type="text" name="price" class="form-control" value="">
+                            <span class="help-block"><?php echo $priceerror;?></span>
                         </div>
 
-                        <div class="form-group <?php echo (!empty($email_error)) ? 'has-error' : ''; ?>">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control" value="">
-                            <span class="help-block"><?php echo $email_error;?></span>
+                        <div class="form-group <?php echo (!empty($weight_error)) ? 'has-error' : ''; ?>">
+                            <label>Вес товара</label>
+                            <input type="weight" name="weight" class="form-control" value="">
+                            <span class="help-block"><?php echo $weight_error;?></span>
                         </div>
 
-                        <div class="form-group <?php echo (!empty($phone_number_error)) ? 'has-error' : ''; ?>">
-                            <label>Phone Number</label>
-                            <input type="number" name="phone_number" class="form-control" value="">
-                            <span class="help-block"><?php echo $phone_number_error;?></span>
+                        <div class="form-group <?php echo (!empty($manufacturer_error)) ? 'has-error' : ''; ?>">
+                            <label>Производитель</label>
+                            <input type="text" name="manufacturer" class="form-control" value="">
+                            <span class="help-block"><?php echo $manufacturer_error;?></span>
                         </div>
 
-                        <div class="form-group <?php echo (!empty($address_error)) ? 'has-error' : ''; ?>">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control"></textarea>
-                            <span class="help-block"><?php echo $address_error;?></span>
+                        <div class="form-group <?php echo (!empty($country_error)) ? 'has-error' : ''; ?>">
+                            <label>Страна Производитель</label>
+                            <input type="text" name="country" class="form-control" value="">
+                            <span class="help-block"><?php echo $country_error;?></span>
                         </div>
 
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-default">Cancel</a>
                     </form>
                 </div>
+
+<?php                 
+        $conn = new mysqli('localhost', 'root', '', 'bogdan2');
+                if ($conn -> connect_error)
+                {
+                    die("Error: " .$conn->connect_error);
+                }
+                else 
+                {
+                    echo "";
+                }
+                $name = $_REQUEST['first_name'];
+                $price = $_REQUEST['price'];
+                $weight = $_REQUEST['weight'];
+                $manufacturer = $_REQUEST['manufacturer'];
+                $country = $_REQUEST['country'];
+
+    if (first_name != '')
+    {
+        $insert_sql = "INSERT INTO product (`id`, `name`, `price`, `weight`, `manufacturer`, `country`)
+        VALUES (0, '{$name}', '{$price}', '{$weight}', '{$manufacturer}', '{$country}')";
+    }
+
+    if (mysqli_query($conn, $insert_sql)) { //this is line 30
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $insert_sql . "<br>" . mysqli_error($conn);
+    }
+
+     ?>
+                
             </div>
         </div>
     </div>
