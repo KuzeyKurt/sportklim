@@ -1,8 +1,4 @@
 <?php
-
-// ПОКА ТУТ СОДЕРЖИМОЕ СТРАНИЦЫ CREATE_PRODUCT.PHP
-
-
 // require_once "config.php";
 
 // $name = $price = $weight = $manufacturer = $country = "";
@@ -88,7 +84,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h2>Добавление склада</h2>
+                        <h2>Добавление продукта</h2>
                     </div>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group <?php echo (!empty($first_name_error)) ? 'has-error' : ''; ?>">
@@ -99,25 +95,25 @@
 
                         <div class="form-group <?php echo (!empty($priceerror)) ? 'has-error' : ''; ?>">
                             <label>Цена товара</label>
-                            <input type="text" name="price" class="form-control" value="" placeholder = "Например: 1500">
+                            <input type="text" name="price" class="form-control" value="" placeholder = "Пример: 1500">
                             <span class="help-block"><?php echo $priceerror;?></span>
                         </div>
 
                         <div class="form-group <?php echo (!empty($weight_error)) ? 'has-error' : ''; ?>">
                             <label>Вес товара</label>
-                            <input type="weight" name="weight" class="form-control" value="" placeholder = "Например: 350 (в граммах)">
+                            <input type="weight" name="weight" class="form-control" value="" placeholder = "Пример: 350 (в граммах)">
                             <span class="help-block"><?php echo $weight_error;?></span>
                         </div>
 
                         <div class="form-group <?php echo (!empty($manufacturer_error)) ? 'has-error' : ''; ?>">
                             <label>Производитель</label>
-                            <input type="text" name="manufacturer" class="form-control" value="" placeholder = "Например: Adidas">
+                            <input type="text" name="manufacturer" class="form-control" value="" placeholder = "Пример: Adidas">
                             <span class="help-block"><?php echo $manufacturer_error;?></span>
                         </div>
 
                         <div class="form-group <?php echo (!empty($country_error)) ? 'has-error' : ''; ?>">
                             <label>Страна Производитель</label>
-                            <input type="text" name="country" class="form-control" value="" placeholder = "Например: США">
+                            <input type="text" name="country" class="form-control" value="" placeholder = "Пример: США">
                             <span class="help-block"><?php echo $country_error;?></span>
                         </div>
 
@@ -142,7 +138,7 @@
                 $manufacturer = $_REQUEST['manufacturer'];
                 $country = $_REQUEST['country'];
 
-    if (first_name != '')
+    if (name != '')
     {
         $insert_sql = "INSERT INTO product (`id`, `name`, `price`, `weight`, `manufacturer`, `country`)
         VALUES (0, '{$name}', '{$price}', '{$weight}', '{$manufacturer}', '{$country}')";

@@ -29,7 +29,7 @@
                     require_once "config.php";
 
                     // select all users
-                    $data = "SELECT * FROM product";
+                    $data = "SELECT * FROM product WHERE name != ''";
                     if($product = mysqli_query($conn, $data)){
                         if(mysqli_num_rows($product) > 0){
                             echo "<table class='table table-bordered table-striped'>
